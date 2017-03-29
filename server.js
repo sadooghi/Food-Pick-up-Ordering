@@ -40,6 +40,10 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
+// redirect CSS bootstrap
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
