@@ -1,41 +1,49 @@
 $(() => {
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/api/users"
+  // }).done((users) => {
+  //   users = $.grep(users, function(param, index){
+  //       return(param.description != undefined);
+  //     });
+  //   var outStr = '<div class="col-sm-8 container food"><div class="row">';
+  //   var counter = 0;
+  //   for(user of users) {
+  //     counter ++;
+  //     outStr += createFoodElement(user);
+  //     if(counter > 1) {
+  //       counter = 0;
+  //       outStr += '</div><div class="row">'
+  //     }
+  //   }
+  //   outStr+= '</div></div>';
+  //   $("<div class='row'>").html(outStr).appendTo($("div"));
+  // });
+  // $("<div class='row'>").html(outStr).appendTo($("div"));
+
+  //     $(".add-to-cart").click(function(){
+  //       var name = $(this).parent().find(".food-name");
+  //       console.log(name.text(), name.data("foodNsame"));
+  //     });
+  //   });
+
+
+  // });
+
+
   $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
-    users = $.grep(users, function(param, index){
-        return(param.description != undefined);
-      });
-    var outStr = '<div class="container scrollers"><div class="col-sm-8 food"><div class="row">';
-    var counter = 0;
-    for(user of users) {
-      counter ++;
-      outStr += createFoodElement(user);
-      if(counter > 1) {
-        counter = 0;
-        outStr += '</div><div class="row">'
-      }
-    }
-    outStr+= '</div></div>';
-    //START THE CART DISPLAY
-    outStr += "<div class='col-sm-4 cart'><div class='row'><h4 id='order-head'>Add to your Cart!</h4>";
-    //LOOP THROUGH CART ATTRIBUTES LATER BUT FOR NOW JUST FOODS
-    for(user of users) {
-      outStr += createCartElement(user);
-    }
-    //INSERT THE CART DISPLAY HERE
-    outStr += "</div></div></div>";
+    method:"GET",
+    url: "/menu/"
+  }).done((food)=>{
 
-    $("<div class='row'>").html(outStr).appendTo($("div"));
+    for(item of food) {
+      $("<div>").text(item.name).appendTo($("body"));
 
-    $(".add-to-cart").click(function(){
-      var name = $(this).parent().find(".food-name");
-      console.log(name.text(), name.data("foodNsame"));
-    });
+    }
   });
+})
 
-
-});
+>>>>>>> origin
 
 
 function createFoodElement (food){
@@ -64,4 +72,5 @@ function createCartElement (food){
   `;
   return $sendItem
 }
+
 
