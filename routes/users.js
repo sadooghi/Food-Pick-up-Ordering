@@ -2,6 +2,8 @@
 
 const express = require('express');
 const router  = express.Router();
+// const knexConfig = require('./knexfile')
+// const knex = require('knex')(knexConfig.development)
 
 module.exports = (knex) => {
 
@@ -10,6 +12,7 @@ module.exports = (knex) => {
       .select("*")
       .from("users")
       .then((results) => {
+
         results = results.concat([{
             id: 1,
             name: "Chicken Shawarma",
@@ -32,6 +35,7 @@ module.exports = (knex) => {
             price: 14
           }
          ]);
+
         console.log(results);
         res.json(results);
     });
