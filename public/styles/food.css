@@ -1,0 +1,31 @@
+
+img {
+  padding: 4px;
+  border-radius: 9px;
+}
+
+.body{
+  margin-top:60px;
+}
+
+.scrollers{
+  position:aboslute;
+  top:0px;
+}
+
+.food{
+  background-color: #f3f3f3;
+  padding: 65px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  overflow-y: scroll;
+  position: absolute !important;
+  height: 100%;
+}
+
+.food button{
+  float:right;
+}

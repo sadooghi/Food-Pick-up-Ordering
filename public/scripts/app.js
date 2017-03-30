@@ -27,7 +27,14 @@ $(() => {
     outStr += "</div></div></div>";
 
     $("<div class='row'>").html(outStr).appendTo($("div"));
+
+    $(".add-to-cart").click(function(){
+      var name = $(this).parent().find(".food-name");
+      console.log(name.text(), name.data("foodNsame"));
+    });
   });
+
+
 });
 
 
@@ -35,8 +42,8 @@ function createFoodElement (food){
   var $sendFood =
     `<div  class="col-xs-6">
       <img class="img-responsive" src="${food.picture}">
-      <b>${food.name}</b>, Price: ${food.price}
-      <button class="btn">+1</button>
+      <div class="food-name" data-food-name="${food.id}"><b>${food.name}</b></div>, Price: ${food.price}
+      <button class="btn add-to-cart">+1</button>
       <span class="description">
       ${food.description}
       </span>
@@ -49,7 +56,7 @@ function createCartElement (food){
   var $sendItem =
   `<div class="col-lg-12">
     <img class="img-responsive cart-pic" src="${food.picture}">
-    <span class="name">${food.name}</span>
+    <span class="food-name">${food.name}</span>
     <button class="btn incr">+1</button>
     <button class="btn decr">-1</button>
 
