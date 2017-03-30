@@ -1,13 +1,13 @@
 exports.seed = function(knex, Promise) {
   return Promise.all([
-    knex('resturants').del(),
+    knex('restaurants').del(),
     knex('foods').del()
   ])
     .then(function () {
 
       return Promise.all([
 
-        knex('resturants')
+        knex('restaurants')
           .insert({name: 'Urawa Sushi', location: ' 254 Adelaide Street West, Toronto, ON M5H 1X6', food_type: 'Japanese'} ),
 
 
