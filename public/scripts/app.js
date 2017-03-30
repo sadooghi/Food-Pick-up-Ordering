@@ -32,8 +32,8 @@ $(() => {
 
     }
 
-  })
-
+  });
+})
 
 
 
@@ -63,4 +63,5 @@ function createCartElement (food){
   `;
   return $sendItem
 }
+
 

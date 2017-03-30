@@ -10,7 +10,7 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("foods")
+      .from("restaurants")
       .then((results) => {
 
         console.log(results);
