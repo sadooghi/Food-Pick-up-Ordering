@@ -34,7 +34,7 @@ $(() => {
 
   })
 
-});
+
 
 
 function createFoodElement (food){
@@ -43,11 +43,24 @@ function createFoodElement (food){
       <img class="img-responsive" src="${food.picture}">
       <b>${food.name}</b>, Price: ${food.price}
       <button class="btn">+1</button>
-      <br>
       <span class="description">
       ${food.description}
       </span>
 
-     </div>`
+     </div>`;
   return $sendFood;
 }
+
+function createCartElement (food){
+  var $sendItem =
+  `<div class="col-lg-12">
+    <img class="img-responsive cart-pic" src="${food.picture}">
+    <span class="name">${food.name}</span>
+    <button class="btn incr">+1</button>
+    <button class="btn decr">-1</button>
+
+  </div>
+  `;
+  return $sendItem
+}
+
