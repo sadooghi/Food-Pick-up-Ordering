@@ -24,13 +24,14 @@ $(() => {
 
   $.ajax({
     method:"GET",
-    url: "/menu/"
-  }).done((food)=>{
+    url: "/restaurant"
+  }).done((foods)=>{
 
-    for(item of food) {
-      $("<div>").text(item.name).appendTo($("body"));
+    for(food of foods) {
+      $("<div>").text(food.name).appendTo($("body"));
 
     }
+
 
   });
 })

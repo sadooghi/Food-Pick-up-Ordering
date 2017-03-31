@@ -1,0 +1,16 @@
+<header>
+
+<% if(!username){ %>
+  <a href= "/register"> sign up</a>
+  <a href= "/login"> sign in</a>
+<% }else {  %>
+  <p>welcome <%= username%></p>
+  <form action="/logout" method="POST">
+  <input type="submit" value="logout">
+  </form>
+<% }%>
+
+
+</header>
+
+
