@@ -1,6 +1,6 @@
 <header>
 
-<% if(!username){ %>
+<% if(isSessionEmpty){ %>
   <a href= "/register"> sign up</a>
   <a href= "/login"> sign in</a>
 <% }else {  %>

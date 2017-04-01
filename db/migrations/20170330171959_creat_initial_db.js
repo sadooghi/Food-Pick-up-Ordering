@@ -8,6 +8,8 @@ exports.up = function(knex, Promise) {
       table.string('name').notNullable();
       table.string('location').notNullable();
       table.string('food_type').notNullable();
+      table.string('picture');
+      table.string('area');
     })
     .createTable('foods',function(table){
       table.increments('id').notNullable().primary();
