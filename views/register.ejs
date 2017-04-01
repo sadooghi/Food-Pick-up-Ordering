@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body style="font-size:20px; padding:50px;">
+    <form action="/register" method="POST" >
+      <%if(error){%>
+        <p><%- error %></p>
+      <%}%>
+        <label for="email">Email address:</label>
+        <input id="email" type="text" name="email" plaEceholder="example@example.com/">
+        <label for="username">Username:</label>
+        <input id="username" type="text" name="username">
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password">
+        <input type="submit" value="sign up">
+    </form>
+  </body>
+</html>

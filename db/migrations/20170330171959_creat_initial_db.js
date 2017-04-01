@@ -4,41 +4,41 @@ exports.up = function(knex, Promise) {
   return Promise.all([
   knex.schema
     .createTable('restaurants', function(table){
-      table.increments('id').notNull().primary();
-      table.string('name').notNull();
-      table.string('location').notNull();
-      table.string('food_type').notNull();
+      table.increments('id').notNullable().primary();
+      table.string('name').notNullable();
+      table.string('location').notNullable();
+      table.string('food_type').notNullable();
     })
     .createTable('foods',function(table){
-      table.increments('id').notNull().primary();
-      table.string('name').notNull();
+      table.increments('id').notNullable().primary();
+      table.string('name').notNullable();
       table.string('description');
       table.string('picture');
-      table.decimal('price').notNull();
-      table.string('currency').notNull();
-      table.integer('restaurant_id').notNull().references('id').inTable('restaurants');
+      table.decimal('price').notNullable();
+      table.string('currency').notNullable();
+      table.integer('restaurant_id').notNullable().references('id').inTable('restaurants');
 
     })
     .createTable('users',function(table){
-      table.increments('id').notNull().primary();
-      table.string('username').notNull();
-      table.string('password').notNull();
-      table.string('email').notNull();
+      table.increments('id').notNullable().primary();
+      table.string('username').notNullable();
+      table.string('password').notNullable();
+      table.string('email').notNullable();
     })
     .createTable('carts',function(table){
-      table.increments('id').notNull().primary();
-      table.integer('user_id').notNull().references('id').inTable('users');
+      table.increments('id').notNullable().primary();
+      table.integer('user_id').notNullable().references('id').inTable('users');
     })
     .createTable('cartsfoods',function(table){
-      table.increments('id').notNull().primary();
-      table.integer('food_id').notNull().references('id').inTable('foods');
-      table.integer('cart_id').notNull().references('id').inTable('carts');
+      table.increments('id').notNullable().primary();
+      table.integer('food_id').notNullable().references('id').inTable('foods');
+      table.integer('cart_id').notNullable().references('id').inTable('carts');
     })
     .createTable('orders',function(table){
-      table.increments('id').notNull().primary();
-      table.integer('phone').notNull();
-      table.integer('cart_id').notNull().references('id').inTable('carts');
-      table.integer('user_id').notNull().references('id').inTable('users');
+      table.increments('id').notNullable().primary();
+      table.integer('phone').notNullable();
+      table.integer('cart_id').notNullable().references('id').inTable('carts');
+      table.integer('user_id').notNullable().references('id').inTable('users');
 
     })
 

@@ -35,12 +35,12 @@ $(() => {
 function loadALL() {
   $.ajax({
     method:"GET",
-    url: "/menu/"
-  }).done((food)=>{
+    url: "/restaurant"
+  }).done((foods)=>{
 
     var outStr = '<div class="col-sm-8 container food"><div class="row menu-row">';
     var counter = 0;
-    for(item of food) {
+    for(item of foods) {
       counter ++;
       outStr += createFoodElement(item);
       if(counter > 1) {

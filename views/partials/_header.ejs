@@ -1,0 +1,21 @@
+<header>
+  <nav id="nav-bar">
+    <img id="logo" src="/images/paper-bag.png">
+      <span class="header text-center">
+        PICK I T U P
+      </span>
+<% if(!username){ %>
+  <button class="btn sign IO"><a href= "/register"> sign up</a></button>
+  <button class="btn sign IO"><a href= "/login"> sign in</a></button>
+<% }else {  %>
+  <form action="/logout" class="sign" method="POST">
+  <input type="submit" value="Logout" class="btn">
+  </form>
+  <p class="sign wlcm">Welcome <%= username%>!</p>
+<% }%>
+
+ </nav>
+
+</header>
+
+

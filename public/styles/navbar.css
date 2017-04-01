@@ -9,6 +9,20 @@ nav{
   float: left;
 }
 
+.IO{
+  margin: 10px;
+}
+
+.sign{
+  display: inline;
+  padding:10px;
+  float: right;
+}
+
+.wlcm{
+  margin:8px 0px 0px 0px;
+}
+
 #logo{
   border-radius: 0px;
   height: 100%;
@@ -30,4 +44,6 @@ nav{
   z-index: 1;
   border-bottom: solid 1.5px;
   border-bottom-color: #ff8800;
+  display: inline;
 }
+
