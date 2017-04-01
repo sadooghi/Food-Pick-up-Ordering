@@ -1,7 +1,8 @@
-#order-head{
+#order-head, .place-order{
   background-color: rgba(255, 136, 0, 0.49);
-  border-radius:15px;
   padding: 8px;
+  margin-top: 15px;
+  font-size:1.5em;
 }
 
 .cart{
@@ -11,12 +12,12 @@
   bottom: 0px;
   height: 100%;
   overflow-y: scroll;
-  padding: 60px;
+  padding-top: 60px;
 }
 
 img .cart-pic{
-  height:50px;
-  width: auto;
+  height: auto;
+  width: 60%;
 }
 
 @media only screen and (max-width: 767px){
