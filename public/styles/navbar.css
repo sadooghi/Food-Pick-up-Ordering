@@ -18,7 +18,7 @@ nav{
 }
 
 #nav-bar{
-  background-color: rgba(255, 255, 255, 0.76);
+  background-color: rgba(255, 255, 255, 1);
   position: fixed;
   width: 100%;
   padding: 0em 2em 0em 2em;
