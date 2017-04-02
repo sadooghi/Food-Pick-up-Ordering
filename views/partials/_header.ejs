@@ -4,7 +4,7 @@
       <span class="header text-center">
         PICK I T U P
       </span>
-<% if(!username){ %>
+<% if(isSessionEmpty){ %>
   <button class="btn sign IO"><a href= "/register"> sign up</a></button>
   <button class="btn sign IO"><a href= "/login"> sign in</a></button>
 <% }else {  %>
