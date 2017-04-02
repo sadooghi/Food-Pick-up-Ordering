@@ -1,0 +1,28 @@
+#buttonShow {
+  display:inline;
+  left: 45% !important;
+}
+
+#restaurants{
+  position:relative;
+  top: 120px;
+}
+
+.dropbtn{
+  display: inline;
+  padding: 10px;
+  top: 8px;
+  position: relative;
+}
+
+.location{
+  text-align: center;
+}
+
+.rest_pic{
+  /*margin:20px;*/
+  margin: auto;
+  padding-top:10px;
+  border-radius:15px;
+  width: 90%;
+}

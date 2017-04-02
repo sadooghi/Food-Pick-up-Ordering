@@ -1,45 +1,21 @@
 $(() => {
-  /*
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
-    users = $.grep(users, function(param, index){
-        return(param.description != undefined);
-      });
-    var outStr = '<div class="col-sm-8 container food"><div class="row">';
-    var counter = 0;
-    for(user of users) {
-      counter ++;
-      outStr += createFoodElement(user);
-      if(counter > 1) {
-        counter = 0;
-        outStr += '</div><div class="row">'
-      }
-    }
-    outStr+= '</div></div>';
-    $("<div class='row'>").html(outStr).appendTo($("div"));
-  });
-  $("<div class='row'>").html(outStr).appendTo($("div"));
-
-      $(".add-to-cart").click(function(){
-        var name = $(this).parent().find(".food-name");
-        console.log(name.text(), name.data("foodNsame"));
-      });
-    });
-  });*/
-  loadALL();
+  var path = window.location.pathname
+  var y = path.split('/')
+  var restaurant_id = y[y.length-1]
+  loadALL(restaurant_id);
 });
 
 
-function loadALL() {
+function loadALL(restaurant_id) {
+
   $.ajax({
     method:"GET",
-    url: "/restaurants/1/menu"
+    url: "/restaurants/menu/api/"+restaurant_id
   }).done((foods)=>{
-
+    console.log(foods);
     var outStr = '<div class="col-sm-8 container food"><div class="row menu-row">';
     var counter = 0;
+
     for(item of foods) {
       counter ++;
       outStr += createFoodElement(item);
@@ -71,20 +47,20 @@ function loadALL() {
     });
 
     $("#order-head").click(function(){
-      var cartItems = newCart(1738);
+      var cartItems = newCart();
     });
 
     $(".place-order").click(function(){
-      placeOrder(1738);
+      placeOrder();
     });
 
   });
 }
 
-function newCart(user_id){
+function newCart(){
   $.ajax({
     method:"POST",
-    url: "restaurants/1/menu/" + user_id + "/cart" //REPLACE 1 WITH USER ID
+    url: "menu/cart/" //REPLACE 1 WITH USER ID
   }).done(() => {
   });
 }
@@ -92,7 +68,7 @@ function newCart(user_id){
 function findCart(item){
    $.ajax({
     method:"POST",
-    url: "restaurants/1/menu/" + item
+    url: "menu/add/" + item
   }).done((cart_items) => {
     console.log(cart_items);
     var $cartStr = "";
@@ -130,17 +106,17 @@ function createCartElement (food){
   return $sendItem;
 }
 
-function placeOrder(user_id){
+function placeOrder(){
   //FIRST AJAX CALL TO POST CART_ID/UID TO ORDERS
   $.ajax({
     method:"POST",
-    url: "restaurants/1/menu/" + user_id + "/order",
+    url: "menu/order",
     data: {phone: 904}
   }).done((uid) => {
     //SECOND AJAX CALL GET A NEW CART_ID AND INSERT
     $.ajax({
       method:"POST",
-      url:"restaurants/1/menu/" + uid +"/cart"
+      url:"menu/cart"
     });
   });
 }
