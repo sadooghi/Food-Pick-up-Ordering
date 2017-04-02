@@ -26,6 +26,10 @@
     margin: 50px;
 }
 
+#dButton{
+    display:none;
+}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
