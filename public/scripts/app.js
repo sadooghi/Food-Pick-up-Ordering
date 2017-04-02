@@ -35,7 +35,7 @@ $(() => {
 function loadALL() {
   $.ajax({
     method:"GET",
-    url: "/restaurant"
+    url: "/restaurants/1/menu"
   }).done((foods)=>{
 
     var outStr = '<div class="col-sm-8 container food"><div class="row menu-row">';
@@ -58,7 +58,7 @@ function loadALL() {
 
     $("<div class='row'>")
       .html(outStr)
-      .appendTo($("div"));
+      .appendTo($(".container"));
 
     $(".place-order").hide();
 

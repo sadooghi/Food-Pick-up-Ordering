@@ -100,10 +100,38 @@ app.get("/", (req, res) => {
   res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
 });
 
-app.get("/restaurant",(req,res) => {
+app.get("/restaurants/:id/menu",(req,res) => {
+  knex
+      .select("*")
+      .from("foods")
+      .where("restaurant_id", req.params.id)
+      .then((results) => {
+        res.json(results);
+      })
+});
+
+app.get("/restaurants",(req,res) => {
+let username = '';
+  let isSessionEmpty = (Object.keys(req.session).length === 0);
+  if(req.session.username){
+    username = req.session.username;
+  } else if(req.session.passport) {
+    username = req.session.passport.user.displayName;
+  }
+    knex
+      .select("*")
+      .from("restaurants")
+      .then((results) => {
+        res.render("dropDown", {isSessionEmpty: isSessionEmpty, username: username});
+      })
+});
+
+app.get("/restaurants/:area",(req,res) => {
+  console.log(122,req.params)
   knex
       .select("*")
       .from("restaurants")
+      .where('area', req.params.area)
       .then((results) => {
         res.json(results);
       })
