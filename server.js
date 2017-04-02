@@ -23,11 +23,11 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
+const passport = require('passport');
+const Strategy = require('passport-facebook').Strategy;
+
 // Seperated Routes for each Resource
-// const usersRoutes = require("./routes/users");
-
-const restaurantRoutes  = require("./routes/restaurants_access");
-
+const foodRoutes = require("./routes/food_access");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -54,23 +54,94 @@ app.use(express.static("public"));
 
 //DIFFERENT THAN THE GET/ RESTAURANT BECAUSE SINGLE
 //THIS GET/ IS A ROUTE WITH RESTAURANT *SSSSSS*
-app.use("/restaurants", restaurantRoutes(knex));
 
 // redirect CSS bootstrap
 app.use('/css', express.static('./node_modules/bootstrap/dist/css'));
 app.use('/js', express.static('./node_modules/bootstrap/dist/js'));
 
+app.use("/restaurants/:id/menu", foodRoutes(knex));
+
+// Configure the Facebook strategy for use by Passport.
+passport.use(new Strategy({
+    clientID: '203993170088169',
+    clientSecret: '26130e020d7384708caf46db19229efe',
+    callbackURL: 'http://localhost:8080/login/facebook/return'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    return cb(null, profile);
+  }));
+
+// Configure Passport authenticated session persistence.
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+// Initialize Passport and restore authentication state, if any, from the session.
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index", {username: req.session.username});
+  let username = '';
+  let isSessionEmpty = (Object.keys(req.session).length === 0);
+  if(req.session.username){
+    username = req.session.username;
+  } else if(req.session.passport) {
+    username = req.session.passport.user.displayName;
+  }
+  res.render("dropDown", {isSessionEmpty: isSessionEmpty , username: username});
 });
-
-app.get("/restaurant",(req,res) => {
+/*
+app.get("/restaurants/:id/menu",(req,res) => {
   knex
       .select("*")
       .from("foods")
+      .where("restaurant_id", req.params.id)
+      .then((results) => {
+        res.json(results);
+      })
+});
+*/
+
+app.get("/restaurants",(req,res) => {
+let username = '';
+  let isSessionEmpty = (Object.keys(req.session).length === 0);
+  if(req.session.username){
+    username = req.session.username;
+  } else if(req.session.passport) {
+    username = req.session.passport.user.displayName;
+  }
+    knex
+      .select("*")
+      .from("restaurants")
+      .then((results) => {
+        res.render("dropDown", {isSessionEmpty: isSessionEmpty, username: username});
+      })
+});
+
+app.get("/restaurants/:area",(req,res) => {
+  // console.log(122,req.params)
+  knex
+      .select("*")
+      .from("restaurants")
+      .where('area', req.params.area)
+      .then((results) => {
+        res.json(results);
+      })
+});
+
+app.get("/restaurant/:id",(req,res) => {
+  knex
+      .select("*")
+      .from("foods")
+      .where('restaurant_id', req.params.id)
       .then((results) => {
         res.json(results);
       })
@@ -84,6 +155,24 @@ app.get("/login", (req, res) => {
     res.render("login",{ error: undefined});
   }
 });
+
+app.get("/login/facebook",
+  passport.authenticate('facebook'), function(req, res) {
+
+  });
+
+app.get('/login/facebook/return',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+app.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('profile', { user: req.user });
+  });
+
 
 app.post("/login", (req, res) => {
   //check if the user and pass are stored in db

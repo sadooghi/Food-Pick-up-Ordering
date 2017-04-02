@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/styles/dropdown.css" type="text/css" />
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/dropdown.js"></script>
+
+
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <div class="dropdown" id="buttonShow">
+      <button onclick="myFunction()" id="dButton" class="dropbtn">filter restaurants by your area</button>
+      <div class="dropdown-content" id="myDropdown">
+        <ul>
+          <li onclick="filterFood('Downtown Core')">DownTown Core</li>
+          <li onclick="filterFood('North York')">North York</li>
+          <li onclick="filterFood('Etobicoke')">Etobicoke</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
+
+

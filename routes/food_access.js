@@ -8,14 +8,22 @@ const router  = express.Router();
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
+    console.log("successful route");
+    let username = '';
+    let isSessionEmpty = (Object.keys(req.session).length === 0);
+    if(req.session.username){
+      username = req.session.username;
+    } else if(req.session.passport) {
+      username = req.session.passport.user.displayName;
+    }
+    // knex
+    //   .select("*")
+    //   .from("foods")
+    //   // .where("restaurant_id", req.params.id)
+    //   .then((results) => {
 
-    knex
-      .select("*")
-      .from("foods")
-      .then((results) => {
-
-        res.json(results);
-    });
+    res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
+    // });
   });
 
   router.post("/:item", (req, res) =>{
