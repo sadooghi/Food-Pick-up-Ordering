@@ -5,10 +5,10 @@ exports.seed = function(knex, Promise) {
   }).then(function () {
       return knex('restaurants')
         .returning('id')
-        .insert([{name: 'Urawa Sushi', location: ' 254 Adelaide Street West, Toronto, ON M5H 1X6', food_type: 'Japanese', picture: 'https://duyt4h9nfnj50.cloudfront.net/sku/ea5ecee4aae081082617b88bb6bdb9a8'},
-          {name: 'Darbar Persian Grill', location: '  2015 avenue Rd., NORTH YORK, ON M5M 4A5', food_type: 'Persian', picture: 'https://duyt4h9nfnj50.cloudfront.net/resized/4b493cf33eef1686f669f81ccb4c549e-w550-4c.jpg'},
-          {name: 'Burger\'s Priest', location: '1599 The Queensway, Etobicoke, ON M8Z 1V1', food_type: 'Hamburger', picture: 'https://duyt4h9nfnj50.cloudfront.net/resized/e837d31ee51323c497e607a3966452af-w550-60.jpg'},
-          {name: 'Swiss Chalet Rotisserie & Grill', location: '1255 The Queensway, Etobicoke, ON M8Z 1S', food_type: 'Burgers and Wings', picture: 'https://duyt4h9nfnj50.cloudfront.net/resized/941c97b494893a4f19eb8a1d0348e731-w550-60.jpg'}
+        .insert([{name: 'Urawa Sushi', location: ' 254 Adelaide Street West, Toronto, ON M5H 1X6', food_type: 'Japanese', picture: 'https://duyt4h9nfnj50.cloudfront.net/sku/ea5ecee4aae081082617b88bb6bdb9a8', area: 'Downtown Core'},
+          {name: 'Darbar Persian Grill', location: '  2015 avenue Rd., NORTH YORK, ON M5M 4A5', food_type: 'Persian', picture: 'https://duyt4h9nfnj50.cloudfront.net/resized/4b493cf33eef1686f669f81ccb4c549e-w550-4c.jpg', area: 'North York'},
+          {name: 'Burger\'s Priest', location: '1599 The Queensway, Etobicoke, ON M8Z 1V1', food_type: 'Hamburger', picture: 'https://duyt4h9nfnj50.cloudfront.net/resized/e837d31ee51323c497e607a3966452af-w550-60.jpg', area: 'Etobicoke'},
+          {name: 'Swiss Chalet Rotisserie & Grill', location: '1255 The Queensway, Etobicoke, ON M8Z 1S', food_type: 'Burgers and Wings', picture: 'https://duyt4h9nfnj50.cloudfront.net/resized/941c97b494893a4f19eb8a1d0348e731-w550-60.jpg', area: 'Etobicoke'}
         ])
     })
   .then((result) => {
