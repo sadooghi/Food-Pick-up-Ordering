@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/all_restaurants.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/dropdown.js"></script>
@@ -18,14 +19,17 @@
   <body>
     <%- include('partials/_header') %>
     <div class="dropdown" id="buttonShow">
-      <button onclick="myFunction()" id="dButton" class="dropbtn">filter restaurants by your area</button>
+      <button onclick="myFunction()" id="dButton" class="dropbtn">Filter</button>
       <div class="dropdown-content" id="myDropdown">
         <ul>
-          <li onclick="filterFood('Downtown Core')">DownTown Core</li>
-          <li onclick="filterFood('North York')">North York</li>
-          <li onclick="filterFood('Etobicoke')">Etobicoke</li>
+          <li onclick="filterFood('Downtown Core')"><a>DownTown Core</a></li>
+          <li onclick="filterFood('North York')"><a>North York</a></li>
+          <li onclick="filterFood('Etobicoke')"><a>Etobicoke</a></li>
         </ul>
       </div>
+    </div>
+    <div id="restaurants">
+    <!--USE ME TO SHOW ALL RESTAURANTS-->
     </div>
   </body>
 </html>

@@ -1,10 +1,15 @@
 "use strict";
 
-const express = require('express');
-const router  = express.Router();
-// const knexConfig = require('./knexfile')
-// const knex = require('knex')(knexConfig.development)
+const express     = require('express');
+const app         = express();
+const router      = express.Router();
+const knexConfig  = require('../knexfile')
+const knex        = require('knex')(knexConfig.development)
+const morgan      = require('morgan');
+const knexLogger  = require('knex-logger');
 
+app.use(morgan('dev'));
+app.use(knexLogger(knex));
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
@@ -19,93 +24,128 @@ module.exports = (knex) => {
     // knex
     //   .select("*")
     //   .from("foods")
-    //   // .where("restaurant_id", req.params.id)
+    //   .where("restaurant_id", req.params.id)
     //   .then((results) => {
 
-    res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
-    // });
+        res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
+      // });
   });
 
-  router.post("/:item", (req, res) =>{
-    knex("carts")
+  router.get("/all/:id", (req, res) => {
+    console.log("successful route");
+    let username = '';
+    let isSessionEmpty = (Object.keys(req.session).length === 0);
+    if(req.session.username){
+      username = req.session.username;
+    } else if(req.session.passport) {
+      username = req.session.passport.user.displayName;
+    }
+    // knex
+    //   .select("*")
+    //   .from("foods")
+    //   .where("restaurant_id", req.params.id)
+    //   .then((results) => {
+
+        res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
+      // });
+  });
+
+  router.post("/add/:item", (req, res) =>{
+    var uName = req.session.username;
+     knex("users")
       .select("id")
-      //HARD CODED, NEED TO FIGURE OUT HOW TO FIND CURRENT USERID
-      .where('user_id', 1738)
-      .orderBy('id', 'desc')
-      .first("id")
-      .then((cart) => {
-        // // console.log(Number(req.params.item), cart[0].id);
-        knex("cartsfoods")
-          .insert({food_id: Number(req.params.item), cart_id: cart.id})
-          .then(() => {
+      .where("username", uName)
+      .first()
+      .then((uID) => {
+        knex("carts")
+          .select("id")
+          //HARD CODED, NEED TO FIGURE OUT HOW TO FIND CURRENT USERID
+          .where('user_id', uID.id)
+          .orderBy('id', 'desc')
+          .first("id")
+          .then((cart) => {
+            // // console.log(Number(req.params.item), cart[0].id);
+            knex("cartsfoods")
+              .insert({food_id: Number(req.params.item), cart_id: cart.id})
+              .then(() => {
+              });
+                return (cart);
+            })
+          .then((cart) => {
+            knex("cartsfoods")
+              .select("*")
+              .where("cart_id", cart.id)
+              .innerJoin("foods", function() {
+                this.on("cartsfoods.food_id", '=', 'foods.id')
+              })
+              .then((food) => {
+                res.json(food);
+              });
           });
-            return (cart);
-        })
-      .then((cart) => {
-        knex("cartsfoods")
-          .select("*")
-          .where("cart_id", cart.id)
-          .innerJoin("foods", function() {
-            this.on("cartsfoods.food_id", '=', 'foods.id')
-          })
-          .then((food) => {
-            res.json(food);
-          });
+
       });
+
   });
 
+
+//SUCCESSFULLY REFACTORED
 //******INSERTING A NEW CART+USERID******* INTO CARTS TABLE
-  router.post("/:user_id/cart", (req, res) =>{
-    var found =
-      knex("users").select("*").where('id', req.params.user_id);
-
-    //GOING TO REMOVE ONCE LOGIN INPUTS TO USERID TABLE
-    if(found == undefined){
-
-      knex("users")
-        .insert({id: req.params.user_id, username: "PATRICK", password: "password", email: "patrick@cn.star"})
-        .then(() => {
-      //********************
-          //INSERTING FIRST CART FOR A NEWLY REQUESTED USER_ID
-          knex("carts")
-            .insert({user_id: req.params.user_id})
-            .then((insertResult) =>{
-              res.json(insertResult);
-          });
-        });
-
-    }else{
-      //assume user already exists and cart created already
-      knex("carts")
-        .insert({'user_id': req.params.user_id})
+  router.post("/cart/", (req, res) =>{
+      //assume user already exists in request session and cart created already
+     var uName = req.session.username;
+     knex("users")
+      .select("id")
+      .where("username", uName)
+      .first()
+      .then((uID) => {
+        knex("carts")
+        .insert({'user_id': uID.id})
         .then((insertResult) =>  {
           res.json(insertResult);
+        });
       });
-    }
+
+    //}
   });
 
-
+//REFACTORING
 //******INSERTING A CART_ID INTO THE ORDER *********WITH USER_ID
-  router.post("/:user_id/order", (req, res) => {
-    var uid = req.params.user_id;
-    knex("carts")
+  router.post("/order", (req, res) => {
+    var uName = req.session.username;
+    knex("users")
       .select("id")
-      //HARD CODED, NEED TO FIGURE OUT HOW TO FIND CURRENT USERID
-      .where('user_id', uid)
-      .orderBy('id', 'desc')
-      .first("id")
-      .then((cart) => {
-        knex("orders")
-          .insert({
-            phone: req.body.phone,
-            user_id: uid,
-            cart_id: cart.id
-          })
-          .then(()=>{
-            res.send(uid);
-          });
+      .where("username", uName)
+      .first()
+      .then((uID) => {
+        knex("carts")
+          .select("id")
+          //HARD CODED, NEED TO FIGURE OUT HOW TO FIND CURRENT USERID
+          .where('user_id', uID.id)
+          .orderBy('id', 'desc')
+          .first("id")
+          .then((cart) => {
+            knex("orders")
+              .insert({
+                phone: req.body.phone,
+                user_id: uID.id,
+                cart_id: cart.id
+              })
+              .then((cart)=>{
+                res.send(cart);
+              });
 
+          });
       });
+  });
+
+  router.get("/api/:rest_id", (req, res) => {
+    var rest_id = req.params.rest_id;
+    knex("foods")
+    .select("*")
+    .where("restaurant_id", rest_id)
+    .then((menu) => {
+      res.json(menu);
+    });
   });
 
 
