@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head></head>
-  <body style="font-size:20px; padding:50px;">
-    <a href="/login/facebook">Log In with Facebook</a>
-    <h1>
-      <form action="/login" method="POST" style="margin:150px;">
-        <%if(error){%>
-          <p><%= error %> </p>
-        <%}%>
-          <lable for="username">Username:</lable>
-          <input id="username" type="text" name="username" placeholder="username" style="width: 100px">
-          <lable for="password">Password:</lable>
-          <input id="password" type="password" name="password" style="width: 100px">
-          <input type="submit" value="sign in">
+  <head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/login.css" type="text/css"/>
+  </head>
+  <body class="loginbody" style="font-size:20px; padding:50px;">
+    <!-- <a href="/login/facebook">Log In with Facebook</a> -->
+    <!-- add onclick to javascript to href -->
+    <div class= "container login">
+      <button class="loginBtn">
+        Login with Facebook
+      </button>
+      <div class="orline"></div>
+      <form action="/login" method="POST">
+          <%if(error){%>
+            <p><%= error %> </p>
+          <%}%>
+
+              <div class= "row">
+                <!-- <div class= "col-sm-4">
+                  <lable for="username">Username:</lable>
+                </div> -->
+                <div class= "col-sm-12">
+                  <input id="username" type="text" name="username" placeholder="username">
+                </div>
+              </div>
+              <div class= "row">
+                <!-- <div class= "col-sm-4">
+                  <lable for="password">Password:</lable>
+                </div> -->
+                <div class= "col-sm-12">
+                  <input id="password" type="password" name="password"  placeholder="password">
+                </div>
+              </div>
+              <div class= "row">
+                <div class= "btn loginsubmit">
+                  <input type="submit" value="sign in">
+                </div>
       </form>
-    </h1>
+    </div>
   </body>
 </html>
