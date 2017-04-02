@@ -26,6 +26,11 @@ app.use(cookieSession({
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 
+// Seperated Routes for each Resource
+// const usersRoutes = require("./routes/users");
+
+// const restaurantRoutes  = require("./routes/restaurants_access");
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -57,6 +62,30 @@ app.use(express.static("public"));
 app.use('/css', express.static('./node_modules/bootstrap/dist/css'));
 app.use('/js', express.static('./node_modules/bootstrap/dist/js'));
 
+// Configure the Facebook strategy for use by Passport.
+passport.use(new Strategy({
+    clientID: '203993170088169',
+    clientSecret: '26130e020d7384708caf46db19229efe',
+    callbackURL: 'http://localhost:8080/login/facebook/return'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    return cb(null, profile);
+  }));
+
+// Configure Passport authenticated session persistence.
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+// Initialize Passport and restore authentication state, if any, from the session.
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const restaurantRoutes = require("./routes/restaurants");
 app.use("/restaurants", restaurantRoutes(knex));
@@ -96,7 +125,46 @@ app.get("/", (req, res) => {
     username = req.session.passport.user.displayName;
   }
   res.render("dropDown", {isSessionEmpty: isSessionEmpty , username: username});
+
 });
+/*
+app.get("/restaurants",(req,res) => {
+let username = '';
+  let isSessionEmpty = (Object.keys(req.session).length === 0);
+  if(req.session.username){
+    username = req.session.username;
+  } else if(req.session.passport) {
+    username = req.session.passport.user.displayName;
+  }
+    knex
+      .select("*")
+      .from("restaurants")
+      .then((results) => {
+        res.render("dropDown", {isSessionEmpty: isSessionEmpty, username: username});
+      })
+});
+
+app.get("/restaurants/:area",(req,res) => {
+  console.log(122,req.params)
+  knex
+      .select("*")
+      .from("restaurants")
+      .where('area', req.params.area)
+      .then((results) => {
+        res.json(results);
+      })
+});
+
+app.get("/restaurant/:id",(req,res) => {
+  knex
+      .select("*")
+      .from("foods")
+      .where('restaurant_id', req.params.id)
+      .then((results) => {
+        res.json(results);
+      })
+});*/
+
 
 app.get("/login", (req, res) => {
   //if there is a cookie, ie. user is logged in, dont show login page and instead go to main page
