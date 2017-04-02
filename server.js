@@ -26,8 +26,7 @@ app.use(cookieSession({
 // Seperated Routes for each Resource
 // const usersRoutes = require("./routes/users");
 
-const foodRoutes = require("./routes/food_access");
-// const restaurantRoutes = require("./routes/main_rout");
+const restaurantRoutes  = require("./routes/restaurants_access");
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -53,7 +52,9 @@ app.use(express.static("public"));
 // Mount all resource routes
 // app.use("/api/users", usersRoutes(knex));
 
-app.use("/menu", foodRoutes(knex));
+//DIFFERENT THAN THE GET/ RESTAURANT BECAUSE SINGLE
+//THIS GET/ IS A ROUTE WITH RESTAURANT *SSSSSS*
+app.use("/restaurants", restaurantRoutes(knex));
 
 // redirect CSS bootstrap
 app.use('/css', express.static('./node_modules/bootstrap/dist/css'));

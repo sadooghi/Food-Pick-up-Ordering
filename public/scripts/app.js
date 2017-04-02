@@ -35,6 +35,7 @@ $(() => {
 function loadALL() {
   $.ajax({
     method:"GET",
+    //DIDN'T CHANGE TO RESTAURANT *SSSS* BECAUSE STILL HITTING REGULAR GET IN SERVER.JS
     url: "/restaurant"
   }).done((foods)=>{
 
@@ -84,7 +85,7 @@ function loadALL() {
 function newCart(user_id){
   $.ajax({
     method:"POST",
-    url: "/menu/" + user_id + "/cart" //REPLACE 1 WITH USER ID
+    url: "restaurants/1/menu/" + user_id + "/cart" //REPLACE 1 WITH USER ID
   }).done(() => {
   });
 }
@@ -92,7 +93,7 @@ function newCart(user_id){
 function findCart(item){
    $.ajax({
     method:"POST",
-    url: "/menu/" + item
+    url: "restaurants/1/menu/" + item
   }).done((cart_items) => {
     console.log(cart_items);
     var $cartStr = "";
@@ -134,13 +135,13 @@ function placeOrder(user_id){
   //FIRST AJAX CALL TO POST CART_ID/UID TO ORDERS
   $.ajax({
     method:"POST",
-    url: "/menu/" + user_id + "/order",
+    url: "restaurants/1/menu/" + user_id + "/order",
     data: {phone: 904}
   }).done((uid) => {
     //SECOND AJAX CALL GET A NEW CART_ID AND INSERT
     $.ajax({
       method:"POST",
-      url:"/menu/" + uid +"/cart"
+      url:"restaurants/1/menu/" + uid +"/cart"
     });
   });
 }
