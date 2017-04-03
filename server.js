@@ -64,8 +64,8 @@ app.use('/js', express.static('./node_modules/bootstrap/dist/js'));
 
 // Configure the Facebook strategy for use by Passport.
 passport.use(new Strategy({
-    clientID: '203993170088169',
-    clientSecret: '26130e020d7384708caf46db19229efe',
+    clientID: '432528213749369',
+    clientSecret: '742aa3007511c95925426c6f8a2fc9c7',
     callbackURL: 'http://localhost:8080/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {

@@ -28,7 +28,7 @@ function loadALL(restaurant_id) {
 
     //STARTING CART COLUMN
     outStr += `<div class="col-sm-4 container cart" >
-    <button class="btn" id="order-head">Start New Cart</button>
+    <button class="btn" id="order-head" onClick="window.open('/restaurants/menu/api/deletecart','_self');location.reload();">Start New Cart</button>
     <button class='btn place-order'>Order Now</button> <div id="cart-start"></div></div>`;
 
 
@@ -39,11 +39,13 @@ function loadALL(restaurant_id) {
     $(".place-order").hide();
 
     $(".add-to-cart").click(function(){
+      // newCart();
       $(".place-order").show();
       var name = $(this).parent().find(".food-name");
-      // console.log(name.text(), name.data("foodName"));
+      // console.log('name.text(), name.data("foodName")');
       console.log(`Found this food item: "${name.data("foodName")}" with id: ${name.data("foodId")}`);
       findCart(name.data("foodId"))
+
     });
 
     $("#order-head").click(function(){
@@ -52,8 +54,9 @@ function loadALL(restaurant_id) {
     });
 
     $(".place-order").click(function(){
-      alert("Your order is being completed!");
       placeOrder();
+      alert("Your order was placed successfully. Thanks for using PICK I T U P");
+
     });
 
   });
@@ -68,6 +71,7 @@ function newCart(){
 }
 
 function findCart(item){
+  console.log('yo');
    $.ajax({
     method:"POST",
     url: "../add/" + item,

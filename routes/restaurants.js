@@ -75,6 +75,10 @@ module.exports = (knex) => {
       })
   });
 
+  // app.get("/api/deletecart", (req, res) => {
+  //   console.log('hello1');
+  // });
+
   return router;
 
 }
