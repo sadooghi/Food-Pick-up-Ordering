@@ -54,7 +54,7 @@ function filterFood(filteredArea) {
   //apennd new ones to the DOM
   $.ajax({
       method:"GET",
-      url: "/restaurants/" + filteredArea
+      url: "/restaurants/location/" + filteredArea
     }).done((restaurants)=>{
       console.log("Retrieved these from the area: " + restaurants);
   });

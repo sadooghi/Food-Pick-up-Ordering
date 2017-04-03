@@ -17,12 +17,6 @@ client.sendMessage({
 });
 
 
-
-
-
-
-
-
 // Send sms to restaurant owner
 client.sendMessage({
   to: '+16044422496',
