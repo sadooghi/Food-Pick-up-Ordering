@@ -226,14 +226,14 @@ app.get("/register", (req, res) => {
   if(req.session.username){
     res.redirect("/")
   }else {
-    res.render("register", {error: false});
+    res.render("register", {error: false });
   }
 });
 
 app.post("/register", (req, res) => {
   //check username, email and password not be empty
   if (req.body.email == "" || req.body.password == "" || req.body.username == ""){
-    res.render('register', {error: 'Please fill all three fields.'})
+    res.render('register', {error: 'Please fill all fields.'})
     return;
   }
 
@@ -246,7 +246,12 @@ app.post("/register", (req, res) => {
       } else {
         //create user in DB
         knex('users')
-          .insert({ username: req.body.username, password: bcrypt.hashSync(req.body.password, 10) , email:req.body.email })
+          .insert({
+            username: req.body.username,
+            password: bcrypt.hashSync(req.body.password, 10) ,
+            email: req.body.email ,
+            phone: req.body.phone
+            })
           .then(function(result) {
             //define cookie
             req.session.username = req.body.username;
