@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
+.restdiv{
+    cursor:pointer;
+}
+
 /* Dropdown button on hover & focus */
 .dropbtn:hover, .dropbtn:focus {
     background-color: #3e8e41;
@@ -20,6 +24,10 @@
     z-index: 9;
     display: inline;
     margin: 50px;
+}
+
+#dButton{
+    display:none;
 }
 
 /* Dropdown Content (Hidden by Default) */
