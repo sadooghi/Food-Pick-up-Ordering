@@ -27,9 +27,9 @@ function loadALL(restaurant_id) {
     outStr += '</div></div>';
 
     //STARTING CART COLUMN
-    outStr += `<div class="col-sm-4 container cart" id="cart-start">
+    outStr += `<div class="col-sm-4 container cart" >
     <button class="btn" id="order-head">Start New Cart</button>
-    <button class='btn place-order'>Order Now</button> </div>`;
+    <button class='btn place-order'>Order Now</button> <div id="cart-start"></div></div>`;
 
 
     $("<div class='row'>")
@@ -60,7 +60,7 @@ function loadALL(restaurant_id) {
 function newCart(){
   $.ajax({
     method:"POST",
-    url: "menu/cart/" //REPLACE 1 WITH USER ID
+    url: "../cart/" //REPLACE 1 WITH USER ID
   }).done(() => {
   });
 }
@@ -68,14 +68,14 @@ function newCart(){
 function findCart(item){
    $.ajax({
     method:"POST",
-    url: "menu/add/" + item
+    url: "../add/" + item
   }).done((cart_items) => {
     console.log(cart_items);
     var $cartStr = "";
     for(i in cart_items){
       $cartStr += createCartElement(cart_items[i]);
     }
-    document.getElementById("cart-start").insertAdjacentHTML('beforeend', $cartStr);
+    document.getElementById("cart-start").innerHTML = $cartStr;
   });
 }
 
@@ -110,13 +110,13 @@ function placeOrder(){
   //FIRST AJAX CALL TO POST CART_ID/UID TO ORDERS
   $.ajax({
     method:"POST",
-    url: "menu/order",
+    url: "../order",
     data: {phone: 904}
   }).done((uid) => {
     //SECOND AJAX CALL GET A NEW CART_ID AND INSERT
     $.ajax({
       method:"POST",
-      url:"menu/cart"
+      url:"../cart"
     });
   });
 }
