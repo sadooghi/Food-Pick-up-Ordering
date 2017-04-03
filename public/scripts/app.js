@@ -47,10 +47,12 @@ function loadALL(restaurant_id) {
     });
 
     $("#order-head").click(function(){
+      alert("You have started a new cart!");
       var cartItems = newCart();
     });
 
     $(".place-order").click(function(){
+      alert("Your order is being completed!");
       placeOrder();
     });
 
@@ -68,15 +70,25 @@ function newCart(){
 function findCart(item){
    $.ajax({
     method:"POST",
-    url: "../add/" + item
-  }).done((cart_items) => {
+    url: "../add/" + item,
+    success: (cart_items) => {
+
+      console.log(cart_items);
+      var cartStr = "";
+      for(i in cart_items){
+        cartStr += createCartElement(cart_items[i]);
+      }
+      document.getElementById("cart-start").innerHTML = cartStr;
+      }
+
+  })/*.done((cart_items) => {
     console.log(cart_items);
-    var $cartStr = "";
+    var cartStr = "";
     for(i in cart_items){
-      $cartStr += createCartElement(cart_items[i]);
+      cartStr += createCartElement(cart_items[i]);
     }
-    document.getElementById("cart-start").innerHTML = $cartStr;
-  });
+    document.getElementById("cart-start").innerHTML = cartStr;
+  });*/
 }
 
 function createFoodElement (food){

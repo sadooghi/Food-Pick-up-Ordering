@@ -1,18 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head></head>
-  <body style="font-size:20px; padding:50px;">
-    <form action="/register" method="POST" >
-      <%if(error){%>
-        <p><%- error %></p>
-      <%}%>
-        <label for="email">Email address:</label>
-        <input id="email" type="text" name="email" plaEceholder="example@example.com/">
-        <label for="username">Username:</label>
-        <input id="username" type="text" name="username">
-        <label for="password">Password:</label>
-        <input id="password" type="password" name="password">
-        <input type="submit" value="sign up">
-    </form>
-  </body>
+ <head>
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/styles/register.css" type="text/css"/>
+ </head>
+ <body class= "regbody" style="font-size:20px; padding:50px;">
+   <form action="/register" method="POST" >
+     <%if(error){%>
+       <p class= "err"><%- error %></p>
+     <%}%>
+     <div class= "container reg">
+       <div class= "row">
+        <!--  <div class= "col-sm-4">
+           <label for="email">Email address:</label>
+         </div> -->
+         <div class= "col-sm-12">
+           <input id="email" type="text" name="email" placeholder="email">
+         </div>
+       </div>
+       <div class= "row">
+         <!-- <div class= "col-sm-4">
+           <label for="username">Username:</label>
+         </div> -->
+         <div class= "col-sm-12">
+           <input id="username" type="text" name="username"  placeholder="username">
+         </div>
+       </div>
+       <div class= "row">
+       <!--   <div class= "col-sm-4">
+           <label for="password">Password:</label>
+         </div> -->
+         <div class= "col-sm-12">
+           <input id="password" type="password" name="password"  placeholder="password">
+         </div>
+       </div>
+       <div class= "row">
+         <!-- <div class= "col-sm-4">
+           <label for="phone">Phone number:</label>
+         </div> -->
+         <div class= "col-sm-12">
+           <input id="phone" type="test" name="phone"  placeholder="phone number">
+         </div>
+       </div>
+       <div class= "row">
+         <div class= "btn regsubmit">
+           <input type="submit" value="sign up">
+         </div>
+       </div>
+     </div>
+
+
+   </form>
+ </body>
 </html>

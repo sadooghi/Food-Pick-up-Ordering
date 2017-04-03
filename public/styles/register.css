@@ -1,0 +1,39 @@
+.reg {
+ border-collapse: separate ;
+ background: rgba(243, 238, 245, 0.6);
+ border-radius: 5px;
+ border-spacing: 0 0.2em ;
+ width: 300px ;
+ height: 280px ;
+ margin: 200px 450px 200px 450px;
+}
+.regsubmit {
+background-color: transparent !important;
+margin: 0px 20px 20px 20px;
+height: 30px;
+width: 250px;
+font-size: 1.2em;
+}
+
+.regsubmit input {
+ border-radius: 5px;
+ background: #e74c3c ;
+ color: white;
+ padding: 0px 65px;
+}
+
+.regbody {
+ background: url('http://www.wallpapers-web.com/data/out/78/4419454-fast-food-wallpapers.jpg')
+
+);
+ background-size: cover;
+ background-color: #fff !important;
+}
+
+.col-sm-12{
+ margin-left: 20px;
+}
+
+.err{
+ color: WHITE;
+}
