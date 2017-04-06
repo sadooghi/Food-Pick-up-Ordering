@@ -82,6 +82,7 @@ module.exports = (knex) => {
                 return (cart);
             })
           .then((cart) => {
+            console.log(cart)
             knex("cartsfoods")
               .select("*")
               .where("cart_id", cart.id)
@@ -89,6 +90,7 @@ module.exports = (knex) => {
                 this.on("cartsfoods.food_id", '=', 'foods.id')
               })
               .then((food) => {
+                console.log(food)
                 res.json(food);
               });
           });

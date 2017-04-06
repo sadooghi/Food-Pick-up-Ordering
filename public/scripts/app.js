@@ -71,11 +71,13 @@ function newCart(){
 }
 
 function findCart(item){
+  // debugger;
   console.log('yo');
    $.ajax({
     method:"POST",
     url: "../add/" + item,
     success: (cart_items) => {
+      // debugger;
 
       console.log(cart_items);
       var cartStr = "";
