@@ -6,7 +6,6 @@ const app     = express();
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
-// const ENV         = process.env.ENV || "development";
 const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig.development);
 
@@ -18,9 +17,6 @@ app.use(knexLogger(knex));
 const foodRoutes = require("./food_access");
 router.use("/menu", foodRoutes(knex));
 
-// const knexConfig = require('./knexfile')
-// const knex = require('knex')(knexConfig.development)
-
 module.exports = (knex) => {
   router.get("/", (req, res) => {
     console.log("successful route");
@@ -31,9 +27,7 @@ module.exports = (knex) => {
     } else if(req.session.passport) {
       username = req.session.passport.user.displayName;
     }
-
     res.render("dropDown", {isSessionEmpty: isSessionEmpty , username: username});
-    // });
   });
 
 
@@ -54,7 +48,6 @@ module.exports = (knex) => {
   });
 
   app.get("/location/:area",(req,res) => {
-    // console.log(122,req.params)
     knex
       .select("*")
       .from("restaurants")
@@ -74,10 +67,6 @@ module.exports = (knex) => {
         res.json(results);
       })
   });
-
-  // app.get("/api/deletecart", (req, res) => {
-  //   console.log('hello1');
-  // });
 
   return router;
 

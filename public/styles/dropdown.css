@@ -53,11 +53,3 @@
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
-
-/*just for now till suraj adds css*/
-/*.dropdown button {
-    z-index: 999999;
-    position: absolute;
-}*/
-
-

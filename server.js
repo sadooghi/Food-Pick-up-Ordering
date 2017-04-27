@@ -26,15 +26,6 @@ app.use(cookieSession({
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 
-// Seperated Routes for each Resource
-// const usersRoutes = require("./routes/users");
-
-// const restaurantRoutes  = require("./routes/restaurants_access");
-
-
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
@@ -51,12 +42,6 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
-
-// Mount all resource routes
-// app.use("/api/users", usersRoutes(knex));
-
-//DIFFERENT THAN THE GET/ RESTAURANT BECAUSE SINGLE
-//THIS GET/ IS A ROUTE WITH RESTAURANT *SSSSSS*
 
 // redirect CSS bootstrap
 app.use('/css', express.static('./node_modules/bootstrap/dist/css'));
@@ -127,44 +112,6 @@ app.get("/", (req, res) => {
   res.render("dropDown", {isSessionEmpty: isSessionEmpty , username: username});
 
 });
-/*
-app.get("/restaurants",(req,res) => {
-let username = '';
-  let isSessionEmpty = (Object.keys(req.session).length === 0);
-  if(req.session.username){
-    username = req.session.username;
-  } else if(req.session.passport) {
-    username = req.session.passport.user.displayName;
-  }
-    knex
-      .select("*")
-      .from("restaurants")
-      .then((results) => {
-        res.render("dropDown", {isSessionEmpty: isSessionEmpty, username: username});
-      })
-});
-
-app.get("/restaurants/:area",(req,res) => {
-  console.log(122,req.params)
-  knex
-      .select("*")
-      .from("restaurants")
-      .where('area', req.params.area)
-      .then((results) => {
-        res.json(results);
-      })
-});
-
-app.get("/restaurant/:id",(req,res) => {
-  knex
-      .select("*")
-      .from("foods")
-      .where('restaurant_id', req.params.id)
-      .then((results) => {
-        res.json(results);
-      })
-});*/
-
 
 app.get("/login", (req, res) => {
   //if there is a cookie, ie. user is logged in, dont show login page and instead go to main page

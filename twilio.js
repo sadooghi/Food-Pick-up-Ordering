@@ -1,8 +1,9 @@
+require('dotenv').load();
 //twillio
 var twilio = require('twilio');
 
 // Find your account sid and auth token in your Twilio account Console.
-var client = twilio('AC06f14f0f86060526d0f9be2457da9957', '46cb2d785ad31bfbb3a19e7246ce2d5f');
+var client = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 function random_time (){
   return Math.ceil(Math.round(Math.random()*((40 - 10)) + 10));

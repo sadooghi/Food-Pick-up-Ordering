@@ -31,14 +31,7 @@ module.exports = (knex) => {
     } else if(req.session.passport) {
       username = req.session.passport.user.displayName;
     }
-    // knex
-    //   .select("*")
-    //   .from("foods")
-    //   .where("restaurant_id", req.params.id)
-    //   .then((results) => {
-
-        res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
-      // });
+    res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
   });
 
   router.get("/all/:id", (req, res) => {
@@ -50,14 +43,7 @@ module.exports = (knex) => {
     } else if(req.session.passport) {
       username = req.session.passport.user.displayName;
     }
-    // knex
-    //   .select("*")
-    //   .from("foods")
-    //   .where("restaurant_id", req.params.id)
-    //   .then((results) => {
-
-        res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
-      // });
+    res.render("index", {isSessionEmpty: isSessionEmpty , username: username});
   });
 
   router.post("/add/:item", (req, res) =>{
@@ -74,7 +60,6 @@ module.exports = (knex) => {
           .orderBy('id', 'desc')
           .first("id")
           .then((cart) => {
-            // // console.log(Number(req.params.item), cart[0].id);
             knex("cartsfoods")
               .insert({food_id: Number(req.params.item), cart_id: cart.id})
               .then(() => {
@@ -113,12 +98,9 @@ module.exports = (knex) => {
         knex("carts")
         .insert({'user_id': uID.id})
         .then((insertResult) =>  {
-          // console.log(114,insertResult)
           res.json(insertResult);
         });
       });
-
-    //}
   });
 
 //REFACTORING
@@ -152,7 +134,6 @@ module.exports = (knex) => {
                   .where("cartsfoods.cart_id", cart.id)
                   .then((res) => {
                     console.log(res)
-                    // // console.log(150,name)
                     //sms to customer
                     client.sendMessage({
                       to: '+16044422496',

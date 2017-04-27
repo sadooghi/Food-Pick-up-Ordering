@@ -1,29 +1,29 @@
-# Node Skeleton
+# Project Description
+Hungry clients can visit Pick It Up and choose a restaurant near them, see their menu and order from them.
+## Functional Specifications:
+* Users can login with their Facebook account (implemented by using Passport library)
+* If users Register and login via Pick It Up, their password will be stored secure (hashed) by using Bcrypt
+* User can choose one restaurant among all restaurants
+* User can choose one or more meals from restaurants' menu
+* User can place order online
+* After placing order restaurant owner receives a SMS and get informed about the menu
+* restaurant owner will answer the SMS and tell a time estimation for making the order ready
+* User will receive a SMS and informed how long does it take for their meal to be ready
+* SMS will be sent to restaurant owner and customer by using Twilio API
 
-## Project Setup
-
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
-
-## Getting Started
-
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Run migrations: `npm run knex migrate:latest`
-  - Check the migrations folder to see what gets created in the DB
-6. Run the seed: `npm run knex seed:run`
-  - Check the seeds file to see what gets seeded in the DB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
-
-## Dependencies
-
-- Node 5.10.x or above
-- NPM 3.8.x or above
+## Stack Specifications:
+* Node.Js
+* EJS
+* SQL
+* Postgres
+* Knex
+* Bcrypt
+* Passport
+* Javascript
+* HTML & CSS
+* Bootstrap
+## Project Screenshots
+![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/register.png "register_page")
+![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/login.png "login_page")
+![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/restaurants.png "main_page")
+![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/menu_per_restaurant.png "menu_page")

@@ -87,14 +87,7 @@ function findCart(item){
       document.getElementById("cart-start").innerHTML = cartStr;
       }
 
-  })/*.done((cart_items) => {
-    console.log(cart_items);
-    var cartStr = "";
-    for(i in cart_items){
-      cartStr += createCartElement(cart_items[i]);
-    }
-    document.getElementById("cart-start").innerHTML = cartStr;
-  });*/
+  })
 }
 
 function createFoodElement (food){
@@ -138,7 +131,3 @@ function placeOrder(){
     });
   });
 }
-
-
-
-
