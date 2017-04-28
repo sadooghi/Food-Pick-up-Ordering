@@ -23,7 +23,7 @@ Hungry clients can visit Pick It Up and choose a restaurant near them, see their
 * HTML & CSS
 * Bootstrap
 ## Project Screenshots
-![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/register.png "register_page")
-![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/login.png "login_page")
-![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/restaurants.png "main_page")
-![picture alt](https://raw.github.com/sadooghi/Food-Pick-up-Ordering/master/screenshot/menu_per_restaurant.png "menu_page")
+![alt text](https://raw.githubusercontent.com/sadooghi/Food-Pick-up-Ordering/master/screenshots/login.png "register_page")
+![picture alt](https://raw.githubusercontent.com/sadooghi/Food-Pick-up-Ordering/master/screenshots/register.png "login_page")
+![picture alt](https://raw.githubusercontent.com/sadooghi/Food-Pick-up-Ordering/master/screenshots/restaurants.png "main_page")
+![picture alt](https://raw.githubusercontent.com/sadooghi/Food-Pick-up-Ordering/master/screenshots/menu_per_restaurant.png "menu_page")
