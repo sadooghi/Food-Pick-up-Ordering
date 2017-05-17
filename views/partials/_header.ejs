@@ -5,8 +5,8 @@
         PICK I T U P
       </span>
 <% if(isSessionEmpty){ %>
-  <button class="btn sign IO"><a href= "/register"> sign up</a></button>
-  <button class="btn sign IO"><a href= "/login"> sign in</a></button>
+  <a href= "/register"><button class="btn sign IO">sign up</button></a>
+  <a href= "/login"><button class="btn sign IO"> sign in</button></a>
 <% }else {  %>
   <form action="/logout" class="sign" method="POST">
   <input type="submit" value="Logout" class="btn">

@@ -26,6 +26,7 @@ exports.up = function(knex, Promise) {
       table.string('username').notNullable();
       table.string('password').notNullable();
       table.string('email').notNullable();
+      table.bigInteger('phone').notNullable();
     })
     .createTable('carts',function(table){
       table.increments('id').notNullable().primary();
@@ -38,7 +39,7 @@ exports.up = function(knex, Promise) {
     })
     .createTable('orders',function(table){
       table.increments('id').notNullable().primary();
-      table.integer('phone').notNullable();
+      table.bigInteger('phone').notNullable();
       table.integer('cart_id').notNullable().references('id').inTable('carts');
       table.integer('user_id').notNullable().references('id').inTable('users');
 

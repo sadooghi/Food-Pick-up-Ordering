@@ -124,7 +124,7 @@ module.exports = (knex) => {
   router.post("/order", (req, res) => {
     var uName = req.session.username;
     knex("users")
-      .select("id")
+      .select("*")
       .where("username", uName)
       .first()
       .then((uID) => {
@@ -138,7 +138,8 @@ module.exports = (knex) => {
             knex("orders")
               .insert({
                 user_id: uID.id,
-                cart_id: cart.id
+                cart_id: cart.id,
+                phone:   uID.phone
               })
               .then((cartres)=>{
                 console.log(cartres)
