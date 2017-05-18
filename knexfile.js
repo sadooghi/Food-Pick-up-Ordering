@@ -30,10 +30,6 @@ module.exports = {
       database : process.env.DB_NAME,
       port     : process.env.DB_PORT,
       ssl      : process.env.DB_SSL
-    }
-    pool: {
-      min: 2,
-      max: 10
     },
     migrations: {
       directory: './db/migrations',
